@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title|title }}</title>   <!--| - прикрепление функции в нашем случаи каждое слово начинается с большой буквы-->
+</head>
+<body>
+<h1>{{ header }}</h1>
+<p>{{ username }}</p>
+<table border="1">
+    <tr>
+        <th>Name product</th>
+        <th colspan="2">Price</th>
+    </tr>
+{% for product in products %} <!--Создаем цикл чтобы вывести весь словарь по одному-->
+    <tr>
+        <td>{{ product.name }}</td>
+        <td align="center" colspan="2">{{ product.price }}.руб</td>
+    </tr>
+{% endfor %}
+
+{% if products_of_promotions %} <!--Создаем условие если список пустой ничего не выводит если что то есть выводит-->
+    <tr>
+        <th style="background:red; color:white">Акция</th>
+        <th style="background:red; color:white">Старая цена</th>
+        <th style="background:red; color:white">Акция</th>
+    </tr>
+    {% for product in products_of_promotions %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td align="center"><s>{{ product.old_price }}.руб</s></td>
+            <td align="center">{{ product.discount }}.руб</td>
+        </tr>
+    {% endfor %}
+{% endif %}
+</table>
+</body>
+</html>
